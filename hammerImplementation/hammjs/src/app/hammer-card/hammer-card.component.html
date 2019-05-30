@@ -1,0 +1,50 @@
+<!-- <script type="text/javascript">
+ var myElement = document.getElementById('hamm');
+
+// create a simple instance
+// by default, it only adds horizontal recognizers
+var mc = new Hammer(myElement);
+
+// listen to events...
+mc.on("panleft panright tap press", function(ev) {
+    myElement.textContent = ev.type +" gesture detected.";
+});
+
+  </script> -->
+
+<div id="myElement"></div>
+<div id="hamm">
+  
+<mat-card class="example-card" 
+[@cardAnimator]="animationState"
+(@cardAnimator.done)="resetAnimation()"
+(swing)="startAnimation('swing')">
+<mat-card-content>
+  <img src="assets/home-cover-img.png">
+<p>dsfsdfgsdfgdfgsdfgfsd xcvxfvzxcvxc</p>
+</mat-card-content>
+<mat-card-actions >
+  <button mat-raised-button (swipeleft)="startAnimation('swing')">swing</button>
+  <button mat-raised-button (tap)="startAnimation('zoomOutLeft')">zoomOutLeft</button>
+  <button hammertime mat-raised-button color="accent" (doubleTap)="startAnimation('swing')">hammertime</button>
+</mat-card-actions>
+</mat-card>
+</div>
+
+<div class="gesture__zone" 
+  (pinchstart)="onPinchStart($event)"
+  (pinchend)="onPinchEnd($event)"
+  (pinch)="onPinch($event)">
+  <h1>Pinch Gesture</h1>
+  <p [innerHTML]="eventText"></p>
+</div>
+
+<div
+  class="gesture__indicator"
+  *ngFor="let indicator of indicators.gestureIndicators"
+  [style.top.px]="indicator.y - (indicator.size/2)"
+  [style.left.px]="indicator.x - (indicator.size/2)"
+  [style.width.px]="indicator.size"
+  [style.height.px]="indicator.size"
+  [style.transform]="indicator.transform"
+  [@indicatorState]="indicator.state"></div>
